@@ -22,7 +22,11 @@
             <br>
             <a href={{ route('student.edit', $student->id) }}>Edit</a>
             <br>
-            <a href="">Delete</a>
+            <form action="{{ route('student.destroy', $student->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit">Delete</button>
+            </form>
             <br>
             <br>
         </div>

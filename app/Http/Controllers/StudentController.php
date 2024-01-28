@@ -106,6 +106,9 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        unlink(public_path('uploads/'. $student->photo));
+        $student->delete();
+
+        return redirect()->back()->with('success', 'Successfully deleted student information');
     }
 }
