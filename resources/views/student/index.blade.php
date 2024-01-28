@@ -11,9 +11,12 @@
         <li><a href={{ route('student.index') }}>Student List</a></li>
         <li><a href={{ route('student.create') }}>Create Student</a></li>
     </ul>
+
 <h1>All Student List Here</h1>
     @foreach ($students as $student )
+    <img src="{{ asset('uploads/'.$student->photo) }}" alt="" style="width: 200px;height: 100%;">
         <p>{{ $student->name }}</p>
+        <p>{{ $student->email }}</p>
     @endforeach
 </body>
 </html>

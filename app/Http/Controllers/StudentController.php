@@ -29,7 +29,25 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>['required'],
+            'email'=> ['required'],
+            'photo'=>['required'],
+        ]);
+
+        $fn = time().'.'.$request->photo->extension();
+
+        $request->photo->move(public_path('uploads'), $fn);
+
+        $student = new Student;
+
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->photo = $fn;
+
+        $student->save();
+
+        return redirect()->back()->with('success', 'Successfully inserted the student data');
     }
 
     /**
