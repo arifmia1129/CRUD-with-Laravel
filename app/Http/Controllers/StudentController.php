@@ -63,7 +63,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('student.edit', compact('student'));
     }
 
     /**
@@ -71,7 +71,34 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $request->validate([
+            'name'=>['required'],
+            'email'=>['required']
+        ]);
+
+        $obj = Student::find( $student->id );
+        $obj->name = $request->name;
+        $obj->email = $request->email;
+
+
+        if($request->photo) {
+            $request->validate([
+                'photo'=>['required']
+            ]);
+
+            unlink(public_path('uploads/'.$student->photo));
+
+            $fn = time().'.'.$request->photo->extension();
+
+            $request->photo->move(public_path('uploads/'), $fn);
+
+            $obj->photo = $fn;
+        }
+
+        $obj->update();
+
+        return redirect()->back()->with('success', 'Successfully updated data');
+
     }
 
     /**

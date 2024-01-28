@@ -20,7 +20,7 @@
         <div>
             <a href="{{ route('student.show',$student->id) }}">Details</a>
             <br>
-            <a href="">Edit</a>
+            <a href={{ route('student.edit', $student->id) }}>Edit</a>
             <br>
             <a href="">Delete</a>
             <br>
