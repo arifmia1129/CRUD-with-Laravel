@@ -14,9 +14,18 @@
 
 <h1>All Student List Here</h1>
     @foreach ($students as $student )
-    <img src="{{ asset('uploads/'.$student->photo) }}" alt="" style="width: 200px;height: 100%;">
+    <img src="{{ asset('uploads/'.$student->photo) }}" alt="" style="width: 200px;height: 200px;">
         <p>{{ $student->name }}</p>
         <p>{{ $student->email }}</p>
+        <div>
+            <a href="{{ route('student.show',$student->id) }}">Details</a>
+            <br>
+            <a href="">Edit</a>
+            <br>
+            <a href="">Delete</a>
+            <br>
+            <br>
+        </div>
     @endforeach
 </body>
 </html>
